@@ -1,1 +1,2 @@
-# _hi，朋友们你们好呀，我是Snow，你也可以叫我：雪酱，我是一只木桶饭www_
+# About Snow
+This repository contains a static webpage which introduces the owner of this account.
