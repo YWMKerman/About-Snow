@@ -3,6 +3,14 @@
     <title>About Snow</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <style>
+        @font-face {
+            font-family: "YouYuan";
+            src: url("fonts/YouYuan.ttf");
+        }
+        @font-face {
+            font-family: "Source Han Sans";
+            src: url("fonts/NotoSansHans-Regular.otf");
+        }
         #topnav {
             z-index: 5;
             position: fixed;
@@ -35,7 +43,7 @@
             display: block;
             padding: 20px;
             text-align: center;
-            font-family: Microsoft YaHei;
+            font-family: "Source Han Sans";
             font-size: 16px;
             color: black;
         }
@@ -79,7 +87,7 @@
             position: absolute;
             top: 0px;
             left: 300px;
-            font-family: 华文细黑;
+            font-family: "Source Han Sans";
             font-size: 50px;
             color: rgb(51, 51, 51);
         }
@@ -87,7 +95,7 @@
             position: absolute;
             top: 100px;
             left: 305px;
-            font-family: 华文细黑;
+            font-family: "Source Han Sans";
             font-size: 30px;
             color: rgb(51, 51, 51);
         }
@@ -100,7 +108,7 @@
             padding: 40px;
         }
         #profile_intro_text {
-            font-family: 华文细黑;
+            font-family: "Source Han Sans";
             font-size: 20px;
             color: rgb(51, 51, 51);
         }
@@ -135,9 +143,7 @@
         }
         #main_title {
             text-align: center;
-            font-family: 华文细黑;
-            font-style: italic;
-            font-size: 2.5vw;
+            font-family: "YouYuan";
             color: rgb(221, 122, 203);
             padding-top: 10px;
             padding-left: 30px;
@@ -149,12 +155,10 @@
             background-color: rgb(216, 185, 190);
             padding: 20px;
             margin-bottom: 20px;
-            font-size: 1.2vw;
         }
         .title {
             text-align: left;
-            font-family: 华文细黑;
-            font-size: 1.6vw;
+            font-family: "Source Han Sans";
             color: black;
             padding-top: 30px;
             padding-left: 50px;
@@ -163,8 +167,7 @@
         }
         .content {
             text-align: left;
-            font-family: 华文细黑;
-            font-size: 1.2vw;
+            font-family: "Source Han Sans";
             color: black;
             padding-top: 5px;
             padding-left: 50px;
@@ -244,7 +247,7 @@
     //adjust margin
     var screen_width = window.screen.width;
     const main_div = document.getElementById("main_div");
-    var margin = Math.min(Math.max(screen_width-800,200),1920-800)/(1920-800)*15;
+    var margin = Math.min(Math.max(screen_width-800,100),1366-800)/(1366-800)*15;
     main_div.style.marginLeft = margin.toString() + '%';
     main_div.style.marginRight = margin.toString() + '%';
 
