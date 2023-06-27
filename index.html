@@ -4,14 +4,14 @@
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <style>
         #topnav {
-            z-index: 4;
+            z-index: 5;
             position: fixed;
             top: 0px;
             left: 0px;
             right: 0px;
             height: 60px;
             margin: 0;
-            background-color: #f5f5f5;
+            background-color: #f5f5f5d5;
             box-shadow: 0px 2px 2px #aaaaaa;
         }
         #profile {
@@ -60,7 +60,7 @@
         #main_intro {
             z-index: 3;
             position: relative;
-            margin-top: 120px;
+            top: 90px;
             margin-left: 10%;
             margin-right: 10%;
             height: 450px;
@@ -104,13 +104,28 @@
             font-size: 20px;
             color: rgb(51, 51, 51);
         }
+        #down_arrow_div {
+            z-index: 4;
+            position: absolute;
+            top: 600px;
+            left: 0px;
+            right: 0px;
+            margin: auto;
+            width: 80px;
+            height: 80px;
+        }
+        #down_arrow_img {
+            position: relative;
+            max-width: 80px;
+        }
         #main_div {
             z-index: 1;
             position: relative;
-            margin-top: 100px;
+            margin-top: 200px;
             margin-left: 15%;
             margin-right: 15%;
             margin-bottom: 50px;
+            padding-top: 30px;
             padding-bottom: 40px;
             border: 1px rgba(224, 109, 205, 0.404) solid;
             background-color: rgba(235, 190, 218, 0.6);
@@ -122,14 +137,24 @@
             text-align: center;
             font-family: 华文细黑;
             font-style: italic;
+            font-size: 2.5vw;
             color: rgb(221, 122, 203);
             padding-top: 10px;
             padding-left: 30px;
             padding-right: 30px;
+            padding-bottom: 30px;
+        }
+        #quote {
+            border-left: solid 10px #999999;
+            background-color: rgb(216, 185, 190);
+            padding: 20px;
+            margin-bottom: 20px;
+            font-size: 1.2vw;
         }
         .title {
             text-align: left;
             font-family: 华文细黑;
+            font-size: 1.6vw;
             color: black;
             padding-top: 30px;
             padding-left: 50px;
@@ -139,6 +164,7 @@
         .content {
             text-align: left;
             font-family: 华文细黑;
+            font-size: 1.2vw;
             color: black;
             padding-top: 5px;
             padding-left: 50px;
@@ -174,10 +200,13 @@
             </p>
         </div>
     </div>
+    <div id="down_arrow_div">
+        <image id="down_arrow_img" src="images/down-arrow.png"></image>
+    </div>
     <div id="main_div">
         <h1 id="main_title">hi，朋友们你们好呀，我是Snow，你也可以叫我：雪酱，我是一只木桶饭www</h1>
         <p class="content">
-            <blockquote style="border-left: solid 10px #999999; background-color: rgb(216, 185, 190); padding: 20px;">
+            <blockquote id="quote">
                 我愿倾尽一切，倾尽所有，乃至生命，只为实现别人天生就能实现的愿望；
                 <br><br>
                 无论长远，无论虚实，即便跨越时间，跨越空间，当下，及未来……
@@ -211,4 +240,30 @@
         </p>
     </div>
 </body>
+<script>
+    //adjust margin
+    var screen_width = window.screen.width;
+    const main_div = document.getElementById("main_div");
+    var margin = Math.min(Math.max(screen_width-800,200),1920-800)/(1920-800)*15;
+    main_div.style.marginLeft = margin.toString() + '%';
+    main_div.style.marginRight = margin.toString() + '%';
+
+    //init timer arg
+    let t = 0.0;
+    let dt = 0.05;
+
+    //setup updater
+    const down_arrow_div = document.getElementById("down_arrow_div");
+    const main_intro = document.getElementById("main_intro");
+    var timer = setInterval(update,dt*1000);
+
+    function update()
+    {
+        var arrow_top = 590 + 10*Math.sin(t*Math.PI);
+        var intro_top = 80 + 15*Math.sin(t*Math.PI/3);
+        down_arrow_div.style.top = arrow_top.toFixed(2).toString() + "px";
+        main_intro.style.top = intro_top.toFixed(2).toString() + "px";
+        t = t + dt;
+    }
+</script>
 </html>
