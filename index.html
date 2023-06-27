@@ -12,7 +12,7 @@
             src: url("fonts/NotoSansHans-Regular.otf");
         }
         #topnav {
-            z-index: 5;
+            z-index: 6;
             position: fixed;
             top: 0px;
             left: 0px;
@@ -52,7 +52,7 @@
             color: black;
         }
         #background {
-            z-index: 2;
+            z-index: 3;
             position: absolute;
             top: 50px;
             left: 0px;
@@ -61,12 +61,30 @@
             filter: blur(5px);
             box-shadow: 0px 2px 2px;
         }
+        #canvas_container {
+            z-index: 1;
+            position: fixed;
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            width: 100%;
+            height: 100%;
+        }
+        #canvas_background {
+            top: 0px;
+            bottom: 0px;
+            left: 0px;
+            right: 0px;
+            width: 100%;
+            height: 100%;
+        }
         #flag {
             width: 100%;
             height: 620px;
         }
         #main_intro {
-            z-index: 3;
+            z-index: 4;
             position: relative;
             top: 90px;
             margin-left: 10%;
@@ -113,7 +131,7 @@
             color: rgb(51, 51, 51);
         }
         #down_arrow_div {
-            z-index: 4;
+            z-index: 5;
             position: absolute;
             top: 600px;
             left: 0px;
@@ -127,7 +145,7 @@
             max-width: 80px;
         }
         #main_div {
-            z-index: 1;
+            z-index: 2;
             position: relative;
             margin-top: 200px;
             margin-left: 15%;
@@ -135,8 +153,8 @@
             margin-bottom: 50px;
             padding-top: 30px;
             padding-bottom: 40px;
-            border: 1px rgba(224, 109, 205, 0.404) solid;
-            background-color: rgba(235, 190, 218, 0.6);
+            border: 1px rgba(224, 109, 205, 0.637) solid;
+            background-color: rgba(235, 190, 218, 0.719);
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
             box-shadow: 0px 20px 20px #999999;
@@ -153,7 +171,7 @@
         #quote {
             font-family: "小赖字体 SC";
             border-left: solid 10px #999999;
-            background-color: rgb(216, 185, 190);
+            background-color: rgba(216, 185, 190, 0.555);
             padding: 20px;
             margin-bottom: 20px;
         }
@@ -177,7 +195,7 @@
         }
     </style>
 </head>
-<body style="background-color: rgb(243, 210, 215);">
+<body style="background-color: rgb(231, 225, 229)">
     <div id="topnav" class="nav">
         <image id="profile" src="images/profile.png"></image>
         <image id="snow" src="images/snow.png"></image>
@@ -191,6 +209,9 @@
     </div>
     <div id="background">
         <image src="images/flag.png" id="flag"></image>
+    </div>
+    <div id="canvas_container">
+        <canvas id="canvas_background"></canvas>
     </div>
     <div id="main_intro">
         <image id="profile_intro" src="images/profile.png"></image>
@@ -246,28 +267,109 @@
 </body>
 <script>
     //adjust margin
-    var screen_width = window.screen.width;
+    var screen_width = window.innerWidth;
+    var screen_height = window.innerHeight;
     const main_div = document.getElementById("main_div");
     var margin = Math.min(Math.max(screen_width-800,100),1366-800)/(1366-800)*15;
     main_div.style.marginLeft = margin.toString() + '%';
     main_div.style.marginRight = margin.toString() + '%';
 
-    //init timer arg
-    let t = 0.0;
-    let dt = 0.05;
+    //setup canvas
+    const canvas_background = document.getElementById("canvas_background");
+    canvas_background.width = canvas_background.clientWidth * window.devicePixelRatio;
+    canvas_background.height = canvas_background.clientHeight * window.devicePixelRatio;
+    canvas_background.style.width = screen_width.toString() + "px";
+    canvas_background.style.height = screen_height.toString() + "px";
+    const context = canvas_background.getContext("2d");
 
-    //setup updater
+    //setup particles
+    function Particle(phase, r, cx, cy, v, size, color)
+    {
+        this.phase = phase;
+        this.r = r;
+        this.cx = cx;
+        this.cy = cy;
+        this.v = v;
+        this.size = size;
+        this.color = color;
+        this.draw = function () {
+            context.beginPath();
+            context.fillStyle = this.color;
+            context.arc(r*Math.cos(phase+v*t)+cx, r*Math.sin(phase+v*t)+cy, this.size*Math.max(screen_width,screen_height)/200, 0, 2*Math.PI);
+            context.fill();
+            context.closePath();
+        }
+    }
+    let particle_list = [];
+    for (let i=0; i<200; i++)
+    {
+        var phase = Math.random()*2*Math.PI;
+        var r = Math.random()*Math.max(Math.max(screen_width,screen_height),200);
+        var cx = Math.random()*screen_width;
+        var cy = Math.random()*screen_height;
+        var v = Math.random()*0.1+0.01;
+        var size = Math.random()+0.1;
+        var color_num = Math.random()*255;
+        var color = "rgb" + '(' + color_num.toString() + ',' + color_num.toString() + ',' + color_num.toString() + ')';
+        var particle = new Particle(phase, r, cx, cy, v, size, color);
+        particle_list.push(particle);
+    }
+
+    //setup elements
     const down_arrow_div = document.getElementById("down_arrow_div");
     const main_intro = document.getElementById("main_intro");
-    var timer = setInterval(update,dt*1000);
+
+    //setup timer
+    let t = 0.0;
+    let start_time = undefined;
 
     function update()
     {
+        //request animation frame
+        window.requestAnimationFrame(update);
+
+        //get window w,h
+        screen_width = window.innerWidth;
+        screen_height = window.innerHeight;
+
+        //adjust canvas
+        canvas_background.width = canvas_background.clientWidth * window.devicePixelRatio;
+        canvas_background.height = canvas_background.clientHeight * window.devicePixelRatio;
+        canvas_background.style.width = screen_width.toString() + "px";
+        canvas_background.style.height = screen_height.toString() + "px";
+
+        //adjust margin
+        margin = Math.min(Math.max(screen_width-800,100),1366-800)/(1366-800)*15;
+        main_div.style.marginLeft = margin.toString() + '%';
+        main_div.style.marginRight = margin.toString() + '%';
+
+        //calculate time
+        if (start_time == undefined)
+        {
+            start_time = Date.now();
+        }
+        else
+        {
+            time = Date.now();
+            delta_t = (time - start_time)/1000;
+            start_time = Date.now();
+            t = t + delta_t;
+        }
+
+        //update animation
         var arrow_top = 590 + 10*Math.sin(t*Math.PI);
         var intro_top = 80 + 15*Math.sin(t*Math.PI/3);
         down_arrow_div.style.top = arrow_top.toFixed(2).toString() + "px";
         main_intro.style.top = intro_top.toFixed(2).toString() + "px";
-        t = t + dt;
+
+        //update canvas
+        context.clearRect(0,0,screen_width,screen_height);
+        len = particle_list.length;
+        for (let i=0; i<len; i++)
+        {
+            particle_list[i].draw();
+        }
     }
+    update();
 </script>
 </html>
