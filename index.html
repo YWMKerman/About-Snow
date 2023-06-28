@@ -181,10 +181,86 @@
             padding-right: 30px;
             padding-bottom: 30px;
         }
+        #pic_div {
+            margin-left: 40px;
+            margin-right: 40px;
+            height: 240px;
+            background-color: rgba(180, 121, 158, 0.5);
+            border: #d46ebe 1px solid;
+            border-radius: 20px;
+        }
+        #girl_div {
+            margin-left: 40px;
+            margin-right: 40px;
+            height: 240px;
+            background-color: rgba(180, 121, 158, 0.5);
+            border: #d46ebe 1px solid;
+            border-radius: 20px;
+        }
+        .pic {
+            padding: 0px;
+            height: 200px;
+            border-radius: 20px;
+        }
+        .girl {
+            padding: 0px;
+            height: 200px;
+            border-radius: 20px;
+        }
+        #pic_text {
+            position: absolute;
+            margin-top: 85px;
+            margin-left: 20px;
+            text-align: left;
+            font-family: "小赖字体 SC";
+            font-size: 20px;
+            writing-mode: vertical-lr;
+            text-orientation: upright;
+        }
+        #girl_text {
+            position: absolute;
+            margin-top: 85px;
+            margin-left: 20px;
+            text-align: left;
+            font-family: "小赖字体 SC";
+            font-size: 20px;
+            writing-mode: vertical-lr;
+            text-orientation: upright;
+        }
+        #pic_ul {
+            margin: 0px;
+            width: 100%;
+            height: 100%;
+        }
+        #girl_ul {
+            margin: 0px;
+            width: 100%;
+            height: 100%;
+        }
+        .pic_li {
+            float: left;
+            display: block;
+            margin-top: 10px;
+            margin-left: 30px;
+            padding: 5px;
+            background-color: #dad17c7e;
+            border-radius: 20px;
+            box-shadow: 1px 1px 1px;
+        }
+        .girl_li {
+            float: left;
+            display: block;
+            margin-top: 10px;
+            margin-left: 30px;
+            padding: 5px;
+            background-color: #dad07c7e;
+            border-radius: 20px;
+            box-shadow: 1px 1px 1px;
+        }
         #quote {
             font-family: "小赖字体 SC";
             border-left: solid 10px #999999;
-            background-color: rgba(216, 185, 190, 0.555);
+            background-color: rgba(216, 185, 190, 0.479);
             padding: 20px;
             margin-bottom: 20px;
         }
@@ -210,8 +286,8 @@
 </head>
 <body style="background-color: rgb(231, 225, 229)">
     <div id="topnav" class="nav">
-        <image id="profile" src="images/profile.png"></image>
-        <image id="snow" src="images/snow.png"></image>
+        <img id="profile" src="images/profile.png"></img>
+        <img id="snow" src="images/snow.png"></img>
         <ul id="navmenu">
             <li class="navtitle"><a href="">首页</a></li>
             <li class="navtitle"><a href="https://github.com/YWMKerman">Github</a></li>
@@ -221,13 +297,13 @@
         </ul>
     </div>
     <div id="background">
-        <image src="images/flag.png" id="flag"></image>
+        <img src="images/flag.png" id="flag"></img>
     </div>
     <div id="canvas_container">
         <canvas id="canvas_background"></canvas>
     </div>
     <div id="main_intro">
-        <image id="profile_intro" src="images/profile.png"></image>
+        <img id="profile_intro" src="images/profile.png"></img>
         <p id="profile_name">YWMKerman</p>
         <p id="profile_sub_name">Snow</p>
         <div id="profile_textbox_left">
@@ -241,9 +317,7 @@
                 HRT🍥： 2023.3.3
                 <br>
                 所在地： 广东省佛山市禅城区
-                <br>
-                
-                <br>
+                <br><br>
                 闺蜜：<a href="https://twitter.com/yuhan2680" style="text-decoration: none; color: rgb(71, 96, 238)">@yuhan2680</a>
             </p>
         </div>
@@ -258,10 +332,28 @@
         </div>
     </div>
     <div id="down_arrow_div">
-        <image id="down_arrow_img" src="images/down-arrow.png"></image>
+        <img id="down_arrow_img" src="images/down-arrow.png"></img>
     </div>
     <div id="main_div">
         <h1 id="main_title">hi，朋友们你们好呀，我是Snow，你也可以叫我：雪酱，我是一只木桶饭www</h1>
+        <div id="pic_div" class="pic_div">
+            <div id="pic_text">正脸照</div>
+            <ul id="pic_ul">
+                <li id="pic_li_1" class="pic_li"><img id="pic1" class="pic" src="picture/1.jpg"></img></li>
+                <li id="pic_li_2" class="pic_li"><img id="pic2" class="pic" src="picture/2.jpg"></img></li>
+                <li id="pic_li_3" class="pic_li"><img id="pic3" class="pic" src="picture/3.jpg"></img></li>
+            </ul>
+        </div>
+        <br>
+        <div id="girl_div" class="girl_div">
+            <div id="girl_text">女装照</div>
+            <ul id="girl_ul">
+                <li id="girl_li_1" class="girl_li"><img id="girl1" class="girl" src="girl/1.jpg"></img></li>
+                <li id="girl_li_2" class="girl_li"><img id="girl2" class="girl" src="girl/2.jpg"></img></li>
+                <li id="girl_li_3" class="girl_li"><img id="girl3" class="girl" src="girl/3.jpg"></img></li>
+                <li id="girl_li_4" class="girl_li"><img id="girl4" class="girl" src="girl/4.jpg"></img></li>
+            </ul>
+        </div>
         <p class="content">
             <blockquote id="quote">
                 我愿倾尽一切，乃至生命，只为实现别人天生就已实现的愿望；
