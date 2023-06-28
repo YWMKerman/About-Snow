@@ -295,7 +295,7 @@
         this.draw = function () {
             context.beginPath();
             context.fillStyle = this.color;
-            context.arc(r*Math.cos(phase+v*t)+cx, r*Math.sin(phase+v*t)+cy, this.size*Math.max(screen_width,screen_height)/200, 0, 2*Math.PI);
+            context.arc(r*Math.cos(phase+v*t)+cx, r*Math.sin(phase+v*t)+cy, this.size*Math.min(screen_width,screen_height)/600+2, 0, 2*Math.PI);
             context.fill();
             context.closePath();
         }
@@ -308,8 +308,8 @@
         var cx = Math.random()*screen_width;
         var cy = Math.random()*screen_height;
         var v = Math.random()*0.1+0.01;
-        var size = Math.random()+0.1;
-        var color_num = Math.random()*255;
+        var size = Math.random()*4+0.1;
+        var color_num = Math.random()*200;
         var color = "rgb" + '(' + color_num.toString() + ',' + color_num.toString() + ',' + color_num.toString() + ')';
         var particle = new Particle(phase, r, cx, cy, v, size, color);
         particle_list.push(particle);
