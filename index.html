@@ -321,22 +321,30 @@
         this.size = size;
         this.color = color;
         this.draw = function () {
+            if (screen_width < 980)
+            {
+                var height_ratio = 980/screen_width;
+            }
+            else
+            {
+                var height_ratio = 1;
+            }
             context.beginPath();
             context.fillStyle = this.color;
-            context.arc(r*Math.cos(phase+v/r*t)+cx, r*Math.sin(phase+v/r*t)+cy, this.size*Math.min(screen_width,screen_height)/600+2, 0, 2*Math.PI);
+            context.arc((r*Math.cos(phase+v/r*t)+cx)*height_ratio, (r*Math.sin(phase+v/r*t)+cy)*height_ratio, this.size*height_ratio, 0, 2*Math.PI);
             context.fill();
             context.closePath();
         }
     }
     let particle_list = [];
-    for (let i=0; i<100; i++)
+    for (let i=0; i<200; i++)
     {
         var phase = Math.random()*2*Math.PI;
         var r = Math.max(Math.random()*Math.max(screen_width,screen_height),100);
         var cx = Math.random()*screen_width;
         var cy = Math.random()*screen_height;
         var v = Math.random()*50+5;
-        var size = Math.random()*4+0.1;
+        var size = Math.random()*5+0.1;
         var color_num = Math.random()*200;
         var color = "rgb" + '(' + color_num.toString() + ',' + color_num.toString() + ',' + color_num.toString() + ')';
         var particle = new Particle(phase, r, cx, cy, v, size, color);
