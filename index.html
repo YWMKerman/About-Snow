@@ -26,14 +26,14 @@
             position: absolute;
             top: 5px;
             left: 10px;
-            width: 50px;
+            height: 50px;
             border-radius: 25px;
         }
         #snow {
             position: absolute;
             top: 8px;
             left: 58px;
-            width: 100px;
+            height: 42px;
         }
         .navtitle {
             position: relative;
@@ -117,17 +117,30 @@
             font-size: 30px;
             color: rgb(51, 51, 51);
         }
-        #profile_textbox {
+        #profile_textbox_left {
             position: absolute;
-            top: 200px;
+            top: 170px;
             left: 0px;
-            right: 0px;
+            width: 40%;
             bottom: 0px;
             padding: 40px;
         }
-        #profile_intro_text {
+        #profile_intro_text_left {
             font-family: "Source Han Sans";
-            font-size: 20px;
+            font-size: 18px;
+            color: rgb(51, 51, 51);
+        }
+        #profile_textbox_right {
+            position: absolute;
+            top: 170px;
+            right: 0px;
+            width: 40%;
+            bottom: 0px;
+            padding: 40px;
+        }
+        #profile_intro_text_right {
+            font-family: "Source Han Sans";
+            font-size: 18px;
             color: rgb(51, 51, 51);
         }
         #down_arrow_div {
@@ -217,11 +230,26 @@
         <image id="profile_intro" src="images/profile.png"></image>
         <p id="profile_name">YWMKerman</p>
         <p id="profile_sub_name">Snow</p>
-        <div id="profile_textbox">
-            <p id="profile_intro_text">
-                03年天残党mtf｜2023.3.3含糖🍥｜170 55｜铁路，天文，科幻，航天爱好者，喜欢玩Minecraft｜想变得可爱｜闺蜜是<a href="https://twitter.com/yuhan2680" style="text-decoration: none; color: rgb(71, 96, 238)">@yuhan2680</a>｜伪音练习中
-                <br><br>
-                ｜我愿倾尽所有，乃至生命，只为实现别人天生就能实现的愿望；无论长远，无论虚实，即便跨越空间，时间，当下，及未来……
+        <div id="profile_textbox_left">
+            <p id="profile_intro_text_left">
+                性别： MTF
+                <br>
+                生日： 2003.10.24
+                <br>
+                🍥 ： 2023.3.3
+                <br>
+                所在地： 中国广东省佛山市禅城区
+                <br>
+                QQ：2829802773
+                <br>
+                Gmail：YWMKerman@gmail.com
+                <br>
+                闺蜜：<a href="https://twitter.com/yuhan2680" style="text-decoration: none; color: rgb(71, 96, 238)">@yuhan2680</a>
+            </p>
+        </div>
+        <div id="profile_textbox_right">
+            <p id="profile_intro_text_right">
+                Right
             </p>
         </div>
     </div>
@@ -301,10 +329,10 @@
         }
     }
     let particle_list = [];
-    for (let i=0; i<200; i++)
+    for (let i=0; i<100; i++)
     {
         var phase = Math.random()*2*Math.PI;
-        var r = Math.random()*Math.max(Math.max(screen_width,screen_height),200);
+        var r = Math.max(Math.random()*Math.max(screen_width,screen_height),100);
         var cx = Math.random()*screen_width;
         var cy = Math.random()*screen_height;
         var v = Math.random()*50+5;
@@ -329,8 +357,8 @@
         window.requestAnimationFrame(update);
 
         //get window w,h
-        screen_width = window.innerWidth;
-        screen_height = window.innerHeight;
+        screen_width = screen.width;
+        screen_height = screen.height;
 
         //adjust canvas
         canvas_background.width = canvas_background.clientWidth * window.devicePixelRatio;
@@ -342,6 +370,54 @@
         margin = Math.min(Math.max(screen_width-800,100),1366-800)/(1366-800)*15;
         main_div.style.marginLeft = margin.toString() + '%';
         main_div.style.marginRight = margin.toString() + '%';
+
+        //adjust nav height
+        nav = document.getElementById("topnav");
+        profile = document.getElementById("profile");
+        snow = document.getElementById("snow");
+        navtitle = document.getElementsByClassName("navtitle");
+        background = document.getElementById("background");
+        if (screen_width < 980)
+        {
+            var height_ratio = 980/screen_width;
+            nav.style.height = (height_ratio*60).toString() + "px";
+            profile.style.top = (height_ratio*5).toString() + "px";
+            profile.style.left = (height_ratio*10).toString() + "px";
+            profile.style.height = (height_ratio*50).toString() + "px";
+            profile.style.borderRadius = (height_ratio*50).toString() + "px";
+            snow.style.top = (height_ratio*8).toString() + "px";
+            snow.style.left = (height_ratio*58).toString() + "px";
+            snow.style.height = (height_ratio*42).toString() + "px";
+
+            for (let i=0; i<navtitle.length; i++)
+            {
+                navtitle[i].style.left = (height_ratio*120).toString() + "px";
+                navtitle[i].style.padding = (height_ratio*20).toString() + "px";
+                navtitle[i].style.fontSize = (height_ratio*16).toString() + "px";
+            }
+
+            background.style.top = (height_ratio*50).toString() + "px";
+        }
+        else
+        {
+            nav.style.height = "60px";
+            profile.style.top = "5px";
+            profile.style.left = "10px";
+            profile.style.height = "50px";
+            profile.style.borderRadius = "50px";
+            snow.style.top = "8px";
+            snow.style.left = "58px";
+            snow.style.height = "42px";
+
+            for (let i=0; i<navtitle.length; i++)
+            {
+                navtitle[i].style.left = "120px";
+                navtitle[i].style.padding = "20px";
+                navtitle[i].style.fontSize = "16px";
+            }
+
+            background.style.top = "50px";
+        }
 
         //calculate time
         if (start_time == undefined)
@@ -357,8 +433,18 @@
         }
 
         //update animation
-        var arrow_top = 590 + 10*Math.sin(t*Math.PI);
-        var intro_top = 80 + 15*Math.sin(t*Math.PI/3);
+        if (screen_width < 980)
+        {
+            var height_ratio = 980/screen_width;
+            var intro_top_base = 80*height_ratio;
+        }
+        else
+        {
+            var intro_top_base = 80;
+        }
+        var arrow_top_base = 590;
+        var arrow_top = arrow_top_base + 10*Math.sin(t*Math.PI);
+        var intro_top = intro_top_base + 15*Math.sin(t*Math.PI/3);
         down_arrow_div.style.top = arrow_top.toFixed(2).toString() + "px";
         main_intro.style.top = intro_top.toFixed(2).toString() + "px";
 
