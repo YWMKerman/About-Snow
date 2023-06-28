@@ -377,9 +377,17 @@
         snow = document.getElementById("snow");
         navtitle = document.getElementsByClassName("navtitle");
         background = document.getElementById("background");
+
         if (screen_width < 980)
         {
-            var height_ratio = 980/screen_width;
+            if (screen_width < 620)
+            {
+                var height_ratio = 980/620;
+            }
+            else
+            {
+                var height_ratio = 980/screen_width;
+            }
             nav.style.height = (height_ratio*60).toString() + "px";
             profile.style.top = (height_ratio*5).toString() + "px";
             profile.style.left = (height_ratio*10).toString() + "px";
@@ -391,12 +399,13 @@
 
             for (let i=0; i<navtitle.length; i++)
             {
-                navtitle[i].style.left = (height_ratio*120).toString() + "px";
+                navtitle[i].style.left = (height_ratio*(120+20)-20).toString() + "px";
                 navtitle[i].style.padding = (height_ratio*20).toString() + "px";
                 navtitle[i].style.fontSize = (height_ratio*16).toString() + "px";
             }
 
             background.style.top = (height_ratio*50).toString() + "px";
+            main_div.style.marginTop = (height_ratio*(200-150)+150).toString() + "px";
         }
         else
         {
@@ -417,6 +426,7 @@
             }
 
             background.style.top = "50px";
+            main_div.style.marginTop = "200px";
         }
 
         //calculate time
@@ -435,14 +445,22 @@
         //update animation
         if (screen_width < 980)
         {
-            var height_ratio = 980/screen_width;
+            if (screen_width < 620)
+            {
+                var height_ratio = 980/620;
+            }
+            else
+            {
+                var height_ratio = 980/screen_width;
+            }
+            var arrow_top_base = (590-520)*height_ratio+520;
             var intro_top_base = 80*height_ratio;
         }
         else
         {
+            var arrow_top_base = 590;
             var intro_top_base = 80;
         }
-        var arrow_top_base = 590;
         var arrow_top = arrow_top_base + 10*Math.sin(t*Math.PI);
         var intro_top = intro_top_base + 15*Math.sin(t*Math.PI/3);
         down_arrow_div.style.top = arrow_top.toFixed(2).toString() + "px";
