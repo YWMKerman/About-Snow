@@ -391,12 +391,55 @@
 </body>
 <script>
     //adjust margin
-    var screen_width = window.innerWidth;
-    var screen_height = window.innerHeight;
+    var screen_width = screen.width;
+    var screen_height = screen.height;
     const main_div = document.getElementById("main_div");
     var margin = Math.min(Math.max(screen_width-800,100),1366-800)/(1366-800)*15;
     main_div.style.marginLeft = margin.toString() + '%';
     main_div.style.marginRight = margin.toString() + '%';
+
+    //get picture elements
+    var pic_li = Array.from(document.getElementsByClassName("pic_li"));
+    var girl_li = Array.from(document.getElementsByClassName("girl_li"));
+    const picture = pic_li.concat(girl_li);
+
+    //define mouse event function
+    function onmouseover()
+    {
+        this.style.boxShadow = "5px 5px 5px";
+        this.style.transform = "scale(1.1)";
+        this.style.transition = "transform 0.3s ease";
+    }
+
+    function onmouseout()
+    {
+        this.style.boxShadow = "1px 1px 1px";
+        this.style.transform = "scale(1.0)";
+        this.style.transition = "transform 0.3s ease";
+    }
+
+    function onmousedown()
+    {
+        this.style.boxShadow = "5px 5px 5px";
+        this.style.transform = "scale(1.05)";
+        this.style.transition = "transform 0.1s ease";
+    }
+
+    function onmouseup()
+    {
+        this.style.boxShadow = "5px 5px 5px";
+        this.style.transform = "scale(1.1)";
+        this.style.transition = "transform 0.1s ease";
+    }
+
+    //add event listener
+    for (let i=0; i<picture.length; i++)
+    {
+        picture[i].addEventListener("mouseover", onmouseover);
+        picture[i].addEventListener("mouseout", onmouseout);
+        picture[i].addEventListener("mousedown", onmousedown);
+        picture[i].addEventListener("mouseup", onmouseup);
+    }
 
     //setup canvas
     const canvas_background = document.getElementById("canvas_background");
