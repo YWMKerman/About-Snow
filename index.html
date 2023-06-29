@@ -604,6 +604,7 @@
             close_button.style.transition = "transform 0.5s ease";
         });
         close_button.addEventListener("click", function () {
+            document.documentElement.style.overflow = "auto";
             deleteGrayBackground();
             deleteCloseButton();
             deletePicture();
@@ -795,6 +796,7 @@
             case "girl_li_4": var path = "girl/4.jpg"; break;
             default: return;
         }
+        document.documentElement.style.overflow = "hidden";
         addGrayBackground();
         addCloseButton();
         addPicture(path);
