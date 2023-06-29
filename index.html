@@ -3,6 +3,26 @@
     <title>About Snow</title>
     <link rel="icon" type="image/x-icon" href="images/favicon.ico">
     <style>
+        :root {
+            --start-top: 1000px;
+            --end-top: 100px;
+            --current-box-shadow-pic1: 1px 1px 1px;
+            --current-transform-pic1: scale(1.0);
+            --current-box-shadow-pic2: 1px 1px 1px;
+            --current-transform-pic2: scale(1.0);
+            --current-box-shadow-pic2: 1px 1px 1px;
+            --current-transform-pic2: scale(1.0);
+            --current-box-shadow-pic3: 1px 1px 1px;
+            --current-transform-pic3: scale(1.0);
+            --current-box-shadow-girl1: 1px 1px 1px;
+            --current-transform-girl1: scale(1.0);
+            --current-box-shadow-girl2: 1px 1px 1px;
+            --current-transform-girl2: scale(1.0);
+            --current-box-shadow-girl3: 1px 1px 1px;
+            --current-transform-girl3: scale(1.0);
+            --current-box-shadow-girl4: 1px 1px 1px;
+            --current-transform-girl4: scale(1.0);
+        }
         @font-face {
             font-family: "小赖字体 SC";
             src: url("fonts/XiaolaiSC-Regular.ttf");
@@ -10,6 +30,142 @@
         @font-face {
             font-family: "Source Han Sans";
             src: url("fonts/NotoSansHans-Regular.otf");
+        }
+        @keyframes shadow_expand_pic1 {
+            from {box-shadow: var(--current-box-shadow-pic1); transform: var(--current-transform-pic1);}
+            to   {box-shadow: 5px 5px 5px; transform: scale(1.1);}
+        }
+        @keyframes shadow_shrink_pic1 {
+            from {box-shadow: var(--current-box-shadow-pic1); transform: var(--current-transform-pic1);}
+            to   {box-shadow: 1px 1px 1px; transform: scale(1.0);}
+        }
+        @keyframes shadow_expand_half_pic1 {
+            from {box-shadow: var(--current-box-shadow-pic1); transform: var(--current-transform-pic1);}
+            to   {box-shadow: 5px 5px 5px; transform: scale(1.1);}
+        }
+        @keyframes shadow_shrink_half_pic1 {
+            from {box-shadow: var(--current-box-shadow-pic1); transform: var(--current-transform-pic1);}
+            to   {box-shadow: 3px 3px 3px; transform: scale(1.05);}
+        }
+        @keyframes shadow_expand_pic2 {
+            from {box-shadow: var(--current-box-shadow-pic2); transform: var(--current-transform-pic2);}
+            to   {box-shadow: 5px 5px 5px; transform: scale(1.1);}
+        }
+        @keyframes shadow_shrink_pic2 {
+            from {box-shadow: var(--current-box-shadow-pic2); transform: var(--current-transform-pic2);}
+            to   {box-shadow: 1px 1px 1px; transform: scale(1.0);}
+        }
+        @keyframes shadow_expand_half_pic2 {
+            from {box-shadow: var(--current-box-shadow-pic2); transform: var(--current-transform-pic2);}
+            to   {box-shadow: 5px 5px 5px; transform: scale(1.1);}
+        }
+        @keyframes shadow_shrink_half_pic2 {
+            from {box-shadow: var(--current-box-shadow-pic2); transform: var(--current-transform-pic2);}
+            to   {box-shadow: 3px 3px 3px; transform: scale(1.05);}
+        }
+        @keyframes shadow_expand_pic3 {
+            from {box-shadow: var(--current-box-shadow-pic3); transform: var(--current-transform-pic3);}
+            to   {box-shadow: 5px 5px 5px; transform: scale(1.1);}
+        }
+        @keyframes shadow_shrink_pic3 {
+            from {box-shadow: var(--current-box-shadow-pic3); transform: var(--current-transform-pic3);}
+            to   {box-shadow: 1px 1px 1px; transform: scale(1.0);}
+        }
+        @keyframes shadow_expand_half_pic3 {
+            from {box-shadow: var(--current-box-shadow-pic3); transform: var(--current-transform-pic3);}
+            to   {box-shadow: 5px 5px 5px; transform: scale(1.1);}
+        }
+        @keyframes shadow_shrink_half_pic3 {
+            from {box-shadow: var(--current-box-shadow-pic3); transform: var(--current-transform-pic3);}
+            to   {box-shadow: 3px 3px 3px; transform: scale(1.05);}
+        }
+        @keyframes shadow_expand_girl1 {
+            from {box-shadow: var(--current-box-shadow-girl1); transform: var(--current-transform-girl1);}
+            to   {box-shadow: 5px 5px 5px; transform: scale(1.1);}
+        }
+        @keyframes shadow_shrink_girl1 {
+            from {box-shadow: var(--current-box-shadow-girl1); transform: var(--current-transform-girl1);}
+            to   {box-shadow: 1px 1px 1px; transform: scale(1.0);}
+        }
+        @keyframes shadow_expand_half_girl1 {
+            from {box-shadow: var(--current-box-shadow-girl1); transform: var(--current-transform-girl1);}
+            to   {box-shadow: 5px 5px 5px; transform: scale(1.1);}
+        }
+        @keyframes shadow_shrink_half_girl1 {
+            from {box-shadow: var(--current-box-shadow-girl1); transform: var(--current-transform-girl1);}
+            to   {box-shadow: 3px 3px 3px; transform: scale(1.05);}
+        }
+        @keyframes shadow_expand_girl2 {
+            from {box-shadow: var(--current-box-shadow-girl2); transform: var(--current-transform-girl2);}
+            to   {box-shadow: 5px 5px 5px; transform: scale(1.1);}
+        }
+        @keyframes shadow_shrink_girl2 {
+            from {box-shadow: var(--current-box-shadow-girl2); transform: var(--current-transform-girl2);}
+            to   {box-shadow: 1px 1px 1px; transform: scale(1.0);}
+        }
+        @keyframes shadow_expand_half_girl2 {
+            from {box-shadow: var(--current-box-shadow-girl2); transform: var(--current-transform-girl2);}
+            to   {box-shadow: 5px 5px 5px; transform: scale(1.1);}
+        }
+        @keyframes shadow_shrink_half_girl2 {
+            from {box-shadow: var(--current-box-shadow-girl2); transform: var(--current-transform-girl2);}
+            to   {box-shadow: 3px 3px 3px; transform: scale(1.05);}
+        }
+        @keyframes shadow_expand_girl3 {
+            from {box-shadow: var(--current-box-shadow-girl3); transform: var(--current-transform-girl3);}
+            to   {box-shadow: 5px 5px 5px; transform: scale(1.1);}
+        }
+        @keyframes shadow_shrink_girl3 {
+            from {box-shadow: var(--current-box-shadow-girl3); transform: var(--current-transform-girl3);}
+            to   {box-shadow: 1px 1px 1px; transform: scale(1.0);}
+        }
+        @keyframes shadow_expand_half_girl3 {
+            from {box-shadow: var(--current-box-shadow-girl3); transform: var(--current-transform-girl3);}
+            to   {box-shadow: 5px 5px 5px; transform: scale(1.1);}
+        }
+        @keyframes shadow_shrink_half_girl3 {
+            from {box-shadow: var(--current-box-shadow-girl3); transform: var(--current-transform-girl3);}
+            to   {box-shadow: 3px 3px 3px; transform: scale(1.05);}
+        }
+        @keyframes shadow_expand_girl4 {
+            from {box-shadow: var(--current-box-shadow-girl4); transform: var(--current-transform-girl4);}
+            to   {box-shadow: 5px 5px 5px; transform: scale(1.1);}
+        }
+        @keyframes shadow_shrink_girl4 {
+            from {box-shadow: var(--current-box-shadow-girl4); transform: var(--current-transform-girl4);}
+            to   {box-shadow: 1px 1px 1px; transform: scale(1.0);}
+        }
+        @keyframes shadow_expand_half_girl4 {
+            from {box-shadow: var(--current-box-shadow-girl4); transform: var(--current-transform-girl4);}
+            to   {box-shadow: 5px 5px 5px; transform: scale(1.1);}
+        }
+        @keyframes shadow_shrink_half_girl4 {
+            from {box-shadow: var(--current-box-shadow-girl4); transform: var(--current-transform-girl4);}
+            to   {box-shadow: 3px 3px 3px; transform: scale(1.05);}
+        }
+        @keyframes show {
+            from {opacity: 0;}
+            to   {opacity: 1;}
+        }
+        @keyframes hide {
+            from {opacity: 1;}
+            to   {opacity: 0;}
+        }
+        @keyframes show_half {
+            from {opacity: 0;}
+            to   {opacity: 0.7;}
+        }
+        @keyframes hide_half {
+            from {opacity: 0.7;}
+            to   {opacity: 0;}
+        }
+        @keyframes moveup {
+            from {top: var(--start-top);}
+            to   {top: var(--end-top);}
+        }
+        @keyframes movedown {
+            from {top: var(--end-top);}
+            to   {top: var(--start-top);}
         }
         #topnav {
             z-index: 6;
@@ -387,41 +543,261 @@
     var screen_height = screen.height;
     const main_div = document.getElementById("main_div");
     var margin = Math.min(Math.max(screen_width-800,100),1366-800)/(1366-800)*15;
-    main_div.style.marginLeft = margin.toString() + '%';
-    main_div.style.marginRight = margin.toString() + '%';
+    main_div.style.marginLeft = parseInt(margin).toString() + '%';
+    main_div.style.marginRight = parseInt(margin).toString() + '%';
 
     //get picture elements
     var pic_li = Array.from(document.getElementsByClassName("pic_li"));
     var girl_li = Array.from(document.getElementsByClassName("girl_li"));
     const picture = pic_li.concat(girl_li);
 
+    //define a function to add gray background
+    function addGrayBackground()
+    {
+        var body_element = document.body;
+        var gray_div = document.createElement("div");
+        gray_div.setAttribute("id", "gray_div");
+        gray_div.style.top = "0px";
+        gray_div.style.bottom = "0px";
+        gray_div.style.left = "0px";
+        gray_div.style.right = "0px";
+        gray_div.style.width = "100%";
+        gray_div.style.height = "100%";
+        gray_div.style.backgroundColor = "#000000";
+        gray_div.style.position = "fixed";
+        gray_div.style.zIndex = "100";
+        gray_div.style.animationName = "show_half";
+        gray_div.style.animationDuration = "0.5s";
+        gray_div.style.animationFillMode = "forwards";
+        body_element.appendChild(gray_div);
+    }
+
+    //define a function to add close button
+    function addCloseButton()
+    {
+        //get body element
+        var body_element = document.body;
+
+        //add close button div
+        var close_button = document.createElement("div");
+        close_button.setAttribute("id", "close_button");
+        close_button.style.top = "60px";
+        close_button.style.right = "60px";
+        close_button.style.width = "50px";
+        close_button.style.height = "50px";
+        close_button.style.position = "fixed";
+        close_button.style.zIndex = "200";
+        close_button.style.animationName = "show";
+        close_button.style.animationDuration = "0.5s";
+        close_button.style.animationFillMode = "forwards";
+        body_element.appendChild(close_button);
+
+        //add event listener
+        close_button.addEventListener("mouseover", function () {
+            close_button.style.transform = "rotate(180deg) scale(1.2)";
+            close_button.style.transformOrigin = "23px 23px";
+            close_button.style.transition = "transform 0.5s ease";
+        });
+        close_button.addEventListener("mouseout", function () {
+            close_button.style.transform = "rotate(0deg) scale(1)";
+            close_button.style.transformOrigin = "23px 23px";
+            close_button.style.transition = "transform 0.5s ease";
+        });
+        close_button.addEventListener("click", function () {
+            deleteGrayBackground();
+            deleteCloseButton();
+            deletePicture();
+        });
+
+        //add cross img
+        var cross = document.createElement("img");
+        cross.setAttribute("id", "cross");
+        cross.setAttribute("src", "images/cross.png");
+        cross.style.top = "0px";
+        cross.style.right = "0px";
+        cross.style.width = "50px";
+        cross.style.height = "50px";
+        close_button.appendChild(cross);
+    }
+
+    //define a function to add picture
+    function addPicture(path)
+    {
+        var body_element = document.body;
+        var picture = document.createElement("img");
+        picture.setAttribute("id", "picture");
+        picture.setAttribute("src", path);
+        picture.style.top = parseInt(window.innerHeight+100).toString() + "px";
+        picture.style.left = "0px";
+        picture.style.right = "0px";
+        picture.style.margin = "auto";
+        picture.style.height = parseInt(window.innerHeight*0.5).toString() + "px";
+        picture.style.position = "fixed";
+        picture.style.zIndex = "300";
+
+        //change --start-top & --end-top
+        document.documentElement.style.setProperty("--start-top", parseInt(window.innerHeight+100).toString() + "px");
+        document.documentElement.style.setProperty("--end-top", parseInt((window.innerHeight-parseInt(window.innerHeight*0.5))/2).toString() + "px");
+
+        //setup animation
+        picture.style.animationName = "moveup";
+        picture.style.animationDuration = "0.5s";
+        picture.style.animationFillMode = "forwards";
+
+        body_element.appendChild(picture);
+    }
+
+    //define a function to delete picture
+    function deletePicture()
+    {
+        var picture = document.getElementById("picture");
+        if (picture != null)
+        {
+            //change --start-top & --end-top
+            document.documentElement.style.setProperty("--start-top", parseInt(window.innerHeight+100).toString() + "px");
+            document.documentElement.style.setProperty("--end-top", parseInt((window.innerHeight-parseInt(window.innerHeight*0.5))/2).toString() + "px");
+
+            //setup animation
+            picture.style.animationName = "movedown";
+            picture.style.animationDuration = "0.5s";
+            picture.style.animationFillMode = "forwards";
+
+            //add event listener
+            picture.addEventListener("animationend", function () {
+                picture.remove();
+            });
+        }
+    }
+
+    //define a function to delete close button
+    function deleteCloseButton()
+    {
+        var close_button = document.getElementById("close_button");
+        if (close_button != null)
+        {
+            close_button.style.animationName = "hide";
+            close_button.style.animationDuration = "0.5s";
+            close_button.style.animationFillMode = "forwards";
+            close_button.addEventListener("animationend", function () {
+                close_button.remove();
+            });
+        }
+    }
+
+    //define a function to delete gray background
+    function deleteGrayBackground()
+    {
+        var gray_div = document.getElementById("gray_div");
+        if (gray_div != null)
+        {
+            gray_div.style.animationName = "hide_half";
+            gray_div.style.animationDuration = "0.5s";
+            gray_div.style.animationFillMode = "forwards";
+            gray_div.addEventListener("animationend", function () {
+                gray_div.remove();
+            });
+        }
+    }
+
+
+    //get current box shadow property name
+    function getCurrentBoxShadowName(element)
+    {
+        switch (element.id)
+        {
+            case "pic_li_1": return "--current-box-shadow-pic1";
+            case "pic_li_2": return "--current-box-shadow-pic2";
+            case "pic_li_3": return "--current-box-shadow-pic3";
+            case "girl_li_1": return "--current-box-shadow-girl1";
+            case "girl_li_2": return "--current-box-shadow-girl2";
+            case "girl_li_3": return "--current-box-shadow-girl3";
+            case "girl_li_4": return "--current-box-shadow-girl4";
+        }
+    }
+
+    //get current transform property name
+    function getCurrentTransformName(element)
+    {
+        switch (element.id)
+        {
+            case "pic_li_1": return "--current-transform-pic1";
+            case "pic_li_2": return "--current-transform-pic2";
+            case "pic_li_3": return "--current-transform-pic3";
+            case "girl_li_1": return "--current-transform-girl1";
+            case "girl_li_2": return "--current-transform-girl2";
+            case "girl_li_3": return "--current-transform-girl3";
+            case "girl_li_4": return "--current-transform-girl4";
+        }
+    }
+
+    //get current animation name
+    function getCurrentAnimationName(animation_name, element)
+    {
+        switch (element.id)
+        {
+            case "pic_li_1": return animation_name + "_pic1";
+            case "pic_li_2": return animation_name + "_pic2";
+            case "pic_li_3": return animation_name + "_pic3";
+            case "girl_li_1": return animation_name + "_girl1";
+            case "girl_li_2": return animation_name + "_girl2";
+            case "girl_li_3": return animation_name + "_girl3";
+            case "girl_li_4": return animation_name + "_girl4";
+        }
+    }
+
     //define mouse event function
     function onmouseover()
     {
-        this.style.boxShadow = "5px 5px 5px";
-        this.style.transform = "scale(1.1)";
-        this.style.transition = "transform 0.3s ease";
+        this_style = window.getComputedStyle(this);
+        document.documentElement.style.setProperty(getCurrentBoxShadowName(this), this_style.getPropertyValue("box-shadow"));
+        document.documentElement.style.setProperty(getCurrentTransformName(this), this_style.getPropertyValue("transform"));
+        this.style.animationName = getCurrentAnimationName("shadow_expand", this);
+        this.style.animationDuration = "0.3s";
+        this.style.animationFillMode = "forwards";
     }
 
     function onmouseout()
     {
-        this.style.boxShadow = "1px 1px 1px";
-        this.style.transform = "scale(1.0)";
-        this.style.transition = "transform 0.3s ease";
+        this_style = window.getComputedStyle(this);
+        document.documentElement.style.setProperty(getCurrentBoxShadowName(this), this_style.getPropertyValue("box-shadow"));
+        document.documentElement.style.setProperty(getCurrentTransformName(this), this_style.getPropertyValue("transform"));
+        this.style.animationName = getCurrentAnimationName("shadow_shrink", this);
+        this.style.animationDuration = "0.3s";
+        this.style.animationFillMode = "forwards";
     }
 
     function onmousedown()
     {
-        this.style.boxShadow = "5px 5px 5px";
-        this.style.transform = "scale(1.05)";
-        this.style.transition = "transform 0.1s ease";
+        this_style = window.getComputedStyle(this);
+        document.documentElement.style.setProperty(getCurrentBoxShadowName(this), this_style.getPropertyValue("box-shadow"));
+        document.documentElement.style.setProperty(getCurrentTransformName(this), this_style.getPropertyValue("transform"));
+        this.style.animationName = getCurrentAnimationName("shadow_shrink_half", this);
+        this.style.animationDuration = "0.1s";
+        this.style.animationFillMode = "forwards";
     }
 
     function onmouseup()
     {
-        this.style.boxShadow = "5px 5px 5px";
-        this.style.transform = "scale(1.1)";
-        this.style.transition = "transform 0.1s ease";
+        this_style = window.getComputedStyle(this);
+        document.documentElement.style.setProperty(getCurrentBoxShadowName(this), this_style.getPropertyValue("box-shadow"));
+        document.documentElement.style.setProperty(getCurrentTransformName(this), this_style.getPropertyValue("transform"));
+        this.style.animationName = getCurrentAnimationName("shadow_expand_half", this);
+        this.style.animationDuration = "0.1s";
+        this.style.animationFillMode = "forwards";
+        switch (this.id)
+        {
+            case "pic_li_1": var path = "picture/1.jpg"; break;
+            case "pic_li_2": var path = "picture/2.jpg"; break;
+            case "pic_li_3": var path = "picture/3.jpg"; break;
+            case "girl_li_1": var path = "girl/1.jpg"; break;
+            case "girl_li_2": var path = "girl/2.jpg"; break;
+            case "girl_li_3": var path = "girl/3.jpg"; break;
+            case "girl_li_4": var path = "girl/4.jpg"; break;
+            default: return;
+        }
+        addGrayBackground();
+        addCloseButton();
+        addPicture(path);
     }
 
     //add event listener
@@ -437,8 +813,8 @@
     const canvas_background = document.getElementById("canvas_background");
     canvas_background.width = canvas_background.clientWidth * window.devicePixelRatio;
     canvas_background.height = canvas_background.clientHeight * window.devicePixelRatio;
-    canvas_background.style.width = screen_width.toString() + "px";
-    canvas_background.style.height = screen_height.toString() + "px";
+    canvas_background.style.width = parseInt(screen_width).toString() + "px";
+    canvas_background.style.height = parseInt(screen_height).toString() + "px";
     const context = canvas_background.getContext("2d");
 
     //setup particles
@@ -477,7 +853,7 @@
         var v = Math.random()*50+5;
         var size = Math.random()*5+0.1;
         var color_num = Math.random()*200;
-        var color = "rgb" + '(' + color_num.toString() + ',' + color_num.toString() + ',' + color_num.toString() + ')';
+        var color = "rgb" + '(' + parseInt(color_num).toString() + ',' + parseInt(color_num).toString() + ',' + parseInt(color_num).toString() + ')';
         var particle = new Particle(phase, r, cx, cy, v, size, color);
         particle_list.push(particle);
     }
@@ -502,13 +878,13 @@
         //adjust canvas
         canvas_background.width = canvas_background.clientWidth * window.devicePixelRatio;
         canvas_background.height = canvas_background.clientHeight * window.devicePixelRatio;
-        canvas_background.style.width = screen_width.toString() + "px";
-        canvas_background.style.height = screen_height.toString() + "px";
+        canvas_background.style.width = parseInt(screen_width).toString() + "px";
+        canvas_background.style.height = parseInt(screen_height).toString() + "px";
 
         //adjust margin
         margin = Math.min(Math.max(screen_width-800,100),1366-800)/(1366-800)*15;
-        main_div.style.marginLeft = margin.toString() + '%';
-        main_div.style.marginRight = margin.toString() + '%';
+        main_div.style.marginLeft = parseInt(margin).toString() + '%';
+        main_div.style.marginRight = parseInt(margin).toString() + '%';
 
         //adjust nav height
         nav = document.getElementById("topnav");
@@ -527,24 +903,24 @@
             {
                 var height_ratio = 980/screen_width;
             }
-            nav.style.height = (height_ratio*60).toString() + "px";
-            profile.style.top = (height_ratio*5).toString() + "px";
-            profile.style.left = (height_ratio*10).toString() + "px";
-            profile.style.height = (height_ratio*50).toString() + "px";
-            profile.style.borderRadius = (height_ratio*50).toString() + "px";
-            snow.style.top = (height_ratio*8).toString() + "px";
-            snow.style.left = (height_ratio*58).toString() + "px";
-            snow.style.height = (height_ratio*42).toString() + "px";
+            nav.style.height = parseInt(height_ratio*60).toString() + "px";
+            profile.style.top = parseInt(height_ratio*5).toString() + "px";
+            profile.style.left = parseInt(height_ratio*10).toString() + "px";
+            profile.style.height = parseInt(height_ratio*50).toString() + "px";
+            profile.style.borderRadius = parseInt(height_ratio*50).toString() + "px";
+            snow.style.top = parseInt(height_ratio*8).toString() + "px";
+            snow.style.left = parseInt(height_ratio*58).toString() + "px";
+            snow.style.height = parseInt(height_ratio*42).toString() + "px";
 
             for (let i=0; i<navtitle.length; i++)
             {
-                navtitle[i].style.left = (height_ratio*(120+20)-20).toString() + "px";
-                navtitle[i].style.padding = (height_ratio*20).toString() + "px";
-                navtitle[i].style.fontSize = (height_ratio*16).toString() + "px";
+                navtitle[i].style.left = parseInt(height_ratio*(120+20)-20).toString() + "px";
+                navtitle[i].style.padding = parseInt(height_ratio*20).toString() + "px";
+                navtitle[i].style.fontSize = parseInt(height_ratio*16).toString() + "px";
             }
 
-            background.style.top = (height_ratio*50).toString() + "px";
-            main_div.style.marginTop = (height_ratio*(200-150)+150).toString() + "px";
+            background.style.top = parseInt(height_ratio*50).toString() + "px";
+            main_div.style.marginTop = parseInt(height_ratio*(200-150)+150).toString() + "px";
         }
         else
         {
@@ -602,8 +978,8 @@
         }
         var arrow_top = arrow_top_base + 10*Math.sin(t*Math.PI);
         var intro_top = intro_top_base + 15*Math.sin(t*Math.PI/3);
-        down_arrow_div.style.top = arrow_top.toFixed(2).toString() + "px";
-        main_intro.style.top = intro_top.toFixed(2).toString() + "px";
+        down_arrow_div.style.top = parseInt(arrow_top).toString() + "px";
+        main_intro.style.top = parseInt(intro_top).toString() + "px";
 
         //update canvas
         context.clearRect(0,0,screen_width,screen_height);
