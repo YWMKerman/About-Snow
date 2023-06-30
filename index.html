@@ -160,12 +160,12 @@
             to   {opacity: 0;}
         }
         @keyframes moveup {
-            from {top: var(--start-top);}
-            to   {top: var(--end-top);}
+            from {top: var(--start-top); opacity: 0;}
+            to   {top: var(--end-top); opacity: 1;}
         }
         @keyframes movedown {
-            from {top: var(--end-top);}
-            to   {top: var(--start-top);}
+            from {top: var(--end-top); opacity: 1;}
+            to   {top: var(--start-top); opacity: 0;}
         }
         #topnav {
             z-index: 6;
@@ -587,6 +587,7 @@
         close_button.style.height = "50px";
         close_button.style.position = "fixed";
         close_button.style.zIndex = "200";
+        close_button.borderRadius = "25px";
         close_button.style.animationName = "show";
         close_button.style.animationDuration = "0.5s";
         close_button.style.animationFillMode = "forwards";
@@ -594,7 +595,7 @@
 
         //add event listener
         close_button.addEventListener("mouseover", function () {
-            close_button.style.transform = "rotate(180deg) scale(1.2)";
+            close_button.style.transform = "rotate(90deg) scale(1.2)";
             close_button.style.transformOrigin = "23px 23px";
             close_button.style.transition = "transform 0.5s ease";
         });
@@ -632,13 +633,13 @@
         picture.style.left = "0px";
         picture.style.right = "0px";
         picture.style.margin = "auto";
-        picture.style.height = parseInt(window.innerHeight*0.5).toString() + "px";
+        picture.style.height = parseInt(Math.min(window.innerWidth, window.innerHeight)*0.8).toString() + "px";
         picture.style.position = "fixed";
         picture.style.zIndex = "300";
 
         //change --start-top & --end-top
         document.documentElement.style.setProperty("--start-top", parseInt(window.innerHeight+100).toString() + "px");
-        document.documentElement.style.setProperty("--end-top", parseInt((window.innerHeight-parseInt(window.innerHeight*0.5))/2).toString() + "px");
+        document.documentElement.style.setProperty("--end-top", parseInt((window.innerHeight-parseInt(Math.min(window.innerWidth, window.innerHeight)*0.8))/2).toString() + "px");
 
         //setup animation
         picture.style.animationName = "moveup";
@@ -753,7 +754,7 @@
         document.documentElement.style.setProperty(getCurrentBoxShadowName(this), this_style.getPropertyValue("box-shadow"));
         document.documentElement.style.setProperty(getCurrentTransformName(this), this_style.getPropertyValue("transform"));
         this.style.animationName = getCurrentAnimationName("shadow_expand", this);
-        this.style.animationDuration = "0.3s";
+        this.style.animationDuration = "0.2s";
         this.style.animationFillMode = "forwards";
     }
 
@@ -763,7 +764,7 @@
         document.documentElement.style.setProperty(getCurrentBoxShadowName(this), this_style.getPropertyValue("box-shadow"));
         document.documentElement.style.setProperty(getCurrentTransformName(this), this_style.getPropertyValue("transform"));
         this.style.animationName = getCurrentAnimationName("shadow_shrink", this);
-        this.style.animationDuration = "0.3s";
+        this.style.animationDuration = "0.2s";
         this.style.animationFillMode = "forwards";
     }
 
