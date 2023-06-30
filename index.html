@@ -629,17 +629,26 @@
         var picture = document.createElement("img");
         picture.setAttribute("id", "picture");
         picture.setAttribute("src", path);
+        var w_h_ratio = picture.naturalWidth/picture.naturalHeight;
+        if (window.innerWidth > window.innerHeight)
+        {
+            var height = window.innerHeight*0.8;
+        }
+        else
+        {
+            var height = window.innerWidth*0.8/w_h_ratio;
+        }
         picture.style.top = parseInt(window.innerHeight+100).toString() + "px";
         picture.style.left = "0px";
         picture.style.right = "0px";
         picture.style.margin = "auto";
-        picture.style.height = parseInt(Math.min(window.innerWidth, window.innerHeight)*0.8).toString() + "px";
+        picture.style.height = parseInt(height).toString() + "px";
         picture.style.position = "fixed";
         picture.style.zIndex = "300";
 
         //change --start-top & --end-top
         document.documentElement.style.setProperty("--start-top", parseInt(window.innerHeight+100).toString() + "px");
-        document.documentElement.style.setProperty("--end-top", parseInt((window.innerHeight-parseInt(Math.min(window.innerWidth, window.innerHeight)*0.8))/2).toString() + "px");
+        document.documentElement.style.setProperty("--end-top", parseInt((window.innerHeight-parseInt(height))/2).toString() + "px");
 
         //setup animation
         picture.style.animationName = "moveup";
