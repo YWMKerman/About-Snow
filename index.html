@@ -630,14 +630,7 @@
         picture.setAttribute("id", "picture");
         picture.setAttribute("src", path);
         var w_h_ratio = picture.naturalWidth/picture.naturalHeight;
-        if (window.innerWidth > window.innerHeight)
-        {
-            var height = window.innerHeight*0.8;
-        }
-        else
-        {
-            var height = window.innerWidth*0.8/w_h_ratio;
-        }
+        var height = Math.min(window.innerHeight*0.8, window.innerWidth*0.8/w_h_ratio);
         picture.style.top = parseInt(window.innerHeight+100).toString() + "px";
         picture.style.left = "0px";
         picture.style.right = "0px";
