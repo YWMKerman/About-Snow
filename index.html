@@ -252,6 +252,7 @@
         #flag {
             width: 100%;
             height: 620px;
+            filter: saturate(1.3) contrast(0.6);
         }
         #main_intro {
             z-index: 4;
@@ -486,7 +487,7 @@
         </ul>
     </div>
     <div id="background">
-        <img src="images/flag.png" id="flag"></img>
+        <img src="images/flag.gif" id="flag"></img>
     </div>
     <div id="main_background">
         <img src="images/main_background.jpg" id="main_background_img"></img>
@@ -917,7 +918,7 @@
     {
         var height_ratio = 1;
     }
-    for (let i=0; i<200; i++)
+    for (let i=0; i<400; i++)
     {
         var phase = Math.random()*2*Math.PI;
         var r = Math.max(Math.random()*Math.max(screen_width*height_ratio,screen_height*height_ratio),100);
