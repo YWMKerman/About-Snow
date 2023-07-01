@@ -194,7 +194,7 @@
             height: 60px;
             margin: 0;
             background-color: #f5f5f5d5;
-            box-shadow: 0px 2px 2px #aaaaaa;
+            box-shadow: 0px 5px 5px #aaaaaa88;
         }
         #profile {
             position: absolute;
@@ -202,6 +202,7 @@
             left: 10px;
             height: 50px;
             border-radius: 25px;
+            box-shadow: 1px 1px 1px #5e5e5e88;
         }
         #snow {
             position: absolute;
@@ -211,7 +212,7 @@
         }
         .navtitle {
             position: relative;
-            top: -16px;
+            top: -18px;
             left: 120px;
             float: left;
             display: block;
@@ -221,7 +222,13 @@
             font-size: 16px;
             color: black;
         }
+        .navtitle_img {
+            vertical-align: middle;
+            margin-right: 5px;
+            height: 25px;
+        }
         .navtitle a {
+            vertical-align: middle;
             text-decoration: none;
             color: black;
         }
@@ -289,6 +296,7 @@
             left: 50px;
             width: 200px;
             border-radius: 100px;
+            box-shadow: 2px 2px 2px #5e5e5e88
         }
         #profile_name {
             position: absolute;
@@ -509,11 +517,22 @@
         <img id="profile" src="images/profile.png"></img>
         <img id="snow" src="images/snow.png"></img>
         <ul id="navmenu">
-            <li class="navtitle"><a href="">首页</a></li>
-            <li class="navtitle"><a href="https://github.com/YWMKerman">Github</a></li>
-            <li class="navtitle"><a href="https://twitter.com/SkySnow_01">Twitter</a></li>
-            <li class="navtitle"><a href="https://youtube.com/@YWMKerman">Youtube</a></li>
-            <li class="navtitle"><a href="https://space.bilibili.com/443343766">Bilibili</a></li>
+            <li class="navtitle">
+                <img src="images/github.png" class="navtitle_img"></img>
+                <a href="https://github.com/YWMKerman">Github</a>
+            </li>
+            <li class="navtitle">
+                <img src="images/twitter.png" class="navtitle_img"></img>
+                <a href="https://twitter.com/SkySnow_01">Twitter</a>
+            </li>
+            <li class="navtitle">
+                <img src="images/youtube.png" class="navtitle_img"></img>
+                <a href="https://youtube.com/@YWMKerman">Youtube</a>
+            </li>
+            <li class="navtitle">
+                <img src="images/bilibili.png" class="navtitle_img"></img>
+                <a href="https://space.bilibili.com/443343766">Bilibili</a>
+            </li>
         </ul>
     </div>
     <div id="background">
@@ -637,6 +656,31 @@
         main_background_img.style.width = width.toString() + "px";
         main_background_img.style.height = height.toString() + "px";
     }
+
+    //add navtitle event listener
+    navtitle = document.getElementsByClassName("navtitle");
+    for (let i=0; i<navtitle.length; i++)
+    {
+        navtitle[i].addEventListener("mouseover", function () {
+            this.style.transform = "scale(1.2) rotate(5deg)";
+            this.style.transition = "transform 0.3s ease";
+        });
+        navtitle[i].addEventListener("mouseout", function () {
+            this.style.transform = "scale(1.0) rotate(0deg)";
+            this.style.transition = "transform 0.3s ease";
+        });
+    }
+
+    //add profile_intro event listener
+    profile_intro = document.getElementById("profile_intro");
+    profile_intro.addEventListener("mouseover", function () {
+        this.style.transform = "scale(1.1) rotate(30deg)";
+        this.style.transition = "transform 0.3s ease";
+    });
+    profile_intro.addEventListener("mouseout", function () {
+        this.style.transform = "scale(1.0) rotate(0deg)";
+        this.style.transition = "transform 0.3s ease";
+    });
 
     //get picture elements
     var pic_li = Array.from(document.getElementsByClassName("pic_li"));
