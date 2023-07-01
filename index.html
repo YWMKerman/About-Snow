@@ -217,6 +217,20 @@
             filter: blur(5px);
             box-shadow: 0px 2px 2px;
         }
+        #main_background {
+            z-index: 0;
+            position: fixed;
+            top: 0px;
+            left: 0px;
+            right: 0px;
+            width: 100%;
+            height: 100%;
+        }
+        #main_background_img {
+            top: 0px;
+            left: 0px;
+            filter: blur(3px);
+        }
         #canvas_container {
             z-index: 1;
             position: fixed;
@@ -326,7 +340,7 @@
             background-color: rgba(235, 190, 218, 0.719);
             border-bottom-left-radius: 20px;
             border-bottom-right-radius: 20px;
-            box-shadow: 0px 20px 20px #999999;
+            box-shadow: 0px 0px 20px #5e5e5e;
         }
         #main_title {
             text-align: center;
@@ -469,6 +483,9 @@
     <div id="background">
         <img src="images/flag.png" id="flag"></img>
     </div>
+    <div id="main_background">
+        <img src="images/main_background.jpg" id="main_background_img"></img>
+    </div>
     <div id="canvas_container">
         <canvas id="canvas_background"></canvas>
     </div>
@@ -533,7 +550,7 @@
             <p class="content">
                 <div id="block">
                     <p id="intro_box" class="content">
-                    我出生于2003年10月24日。 我的朋友帮我起了一个非常好听的名字 “陈雪雯” 我是一位热爱航天，天文，科学，科幻的木桶饭。 我也喜欢听音乐，特别喜欢听《天气之子》电影中的bgm 和《流浪地球2》电影中的bgm。  最喜欢的电影也是《千与千寻》《天气之子》《你的名字》《天气之子》《星际穿越》《流浪地球2》。
+                    我出生于2003年10月24日。 我的朋友帮我起了一个非常好听的名字 “陈雪雯” 我是一位热爱航天，天文，科学，科幻的木桶饭。 我也喜欢听音乐，特别喜欢听《天气之子》电影中的bgm 和《流浪地球2》电影中的bgm。  最喜欢的电影是《千与千寻》《天气之子》《你的名字》《天气之子》《星际穿越》《流浪地球2》。
                     </p>
                 </div>
                 <h2 class="title">父母</h2>
@@ -564,6 +581,25 @@
     var margin = Math.min(Math.max(screen_width-800,100),1366-800)/(1366-800)*15;
     main_div.style.marginLeft = parseInt(margin).toString() + '%';
     main_div.style.marginRight = parseInt(margin).toString() + '%';
+
+    //adjust main background w,h
+    var main_background_img = document.getElementById("main_background_img");
+    var natural_width = main_background_img.naturalWidth;
+    var natural_height = main_background_img.naturalHeight;
+    var w_h_ratio = natural_width/natural_height;
+    var width = Math.max(screen.width, screen.height*w_h_ratio);
+    var height = width/w_h_ratio;
+    if (screen_width < 980)
+    {
+        var height_ratio = 980/screen_width;
+        main_background_img.style.width = (width*height_ratio).toString() + "px";
+        main_background_img.style.height = (height*height_ratio).toString() + "px";
+    }
+    else
+    {
+        main_background_img.style.width = width.toString() + "px";
+        main_background_img.style.height = height.toString() + "px";
+    }
 
     //get picture elements
     var pic_li = Array.from(document.getElementsByClassName("pic_li"));
@@ -862,21 +898,29 @@
             }
             context.beginPath();
             context.fillStyle = this.color;
-            context.arc((r*Math.cos(phase+v/r*t)+cx)*height_ratio, (r*Math.sin(phase+v/r*t)+cy)*height_ratio, this.size*height_ratio, 0, 2*Math.PI);
+            context.arc(r*Math.cos(phase+v/r*t)+cx, r*Math.sin(phase+v/r*t)+cy, this.size*height_ratio, 0, 2*Math.PI);
             context.fill();
             context.closePath();
         }
     }
     let particle_list = [];
-    for (let i=0; i<100; i++)
+    if (screen_width < 980)
+    {
+        var height_ratio = 980/screen_width;
+    }
+    else
+    {
+        var height_ratio = 1;
+    }
+    for (let i=0; i<200; i++)
     {
         var phase = Math.random()*2*Math.PI;
-        var r = Math.max(Math.random()*Math.max(screen_width,screen_height),100);
-        var cx = Math.random()*screen_width;
-        var cy = Math.random()*screen_height;
+        var r = Math.max(Math.random()*Math.max(screen_width*height_ratio,screen_height*height_ratio),100);
+        var cx = Math.random()*screen_width*height_ratio;
+        var cy = Math.random()*screen_height*height_ratio;
         var v = Math.random()*50+5;
         var size = Math.random()*5+0.1;
-        var color_num = Math.random()*200;
+        var color_num = 255 - Math.random()*120;
         var color = "rgb" + '(' + parseInt(color_num).toString() + ',' + parseInt(color_num).toString() + ',' + parseInt(color_num).toString() + ')';
         var particle = new Particle(phase, r, cx, cy, v, size, color);
         particle_list.push(particle);
@@ -902,13 +946,41 @@
         //adjust canvas
         canvas_background.width = canvas_background.clientWidth * window.devicePixelRatio;
         canvas_background.height = canvas_background.clientHeight * window.devicePixelRatio;
-        canvas_background.style.width = parseInt(screen_width).toString() + "px";
-        canvas_background.style.height = parseInt(screen_height).toString() + "px";
+        if (screen_width < 980)
+        {
+            var height_ratio = 980/screen_width;
+            canvas_background.style.width = parseInt(screen_width*height_ratio).toString() + "px";
+            canvas_background.style.height = parseInt(screen_height*height_ratio).toString() + "px";
+        }
+        else
+        {
+            canvas_background.style.width = parseInt(screen_width).toString() + "px";
+            canvas_background.style.height = parseInt(screen_height).toString() + "px";
+        }
 
         //adjust margin
         margin = Math.min(Math.max(screen_width-800,100),1366-800)/(1366-800)*15;
         main_div.style.marginLeft = parseInt(margin).toString() + '%';
         main_div.style.marginRight = parseInt(margin).toString() + '%';
+
+        //adjust main background w,h
+        var main_background_img = document.getElementById("main_background_img");
+        var natural_width = main_background_img.naturalWidth;
+        var natural_height = main_background_img.naturalHeight;
+        var w_h_ratio = natural_width/natural_height;
+        var width = Math.max(screen.width, screen.height*w_h_ratio);
+        var height = width/w_h_ratio;
+        if (screen_width < 980)
+        {
+            var height_ratio = 980/screen_width;
+            main_background_img.style.width = (width*height_ratio).toString() + "px";
+            main_background_img.style.height = (height*height_ratio).toString() + "px";
+        }
+        else
+        {
+            main_background_img.style.width = width.toString() + "px";
+            main_background_img.style.height = height.toString() + "px";
+        }
 
         //adjust nav height
         nav = document.getElementById("topnav");
