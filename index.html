@@ -198,6 +198,7 @@
             top: 100px;
             right: 30px;
             border: 5px #d3d3d3 solid;
+            box-shadow: 5px 5px 5px #5e5e5e88;
             border-radius: 50%;
         }
         #music_icon {
@@ -1230,8 +1231,8 @@
         down_arrow_div.style.top = parseInt(arrow_top).toString() + "px";
         main_intro.style.top = parseInt(intro_top).toString() + "px";
 
-        var play_button = document.getElementById("play_button");
-        play_button.style.transform = "rotate(" + angle.toString() + "deg" + ")";
+        var music_icon = document.getElementById("music_icon");
+        music_icon.style.transform = "rotate(" + angle.toString() + "deg" + ")";
         angle = (Date.now() - start_play_time)/1000*180 + offset_angle;
 
         //update canvas
