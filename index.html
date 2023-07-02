@@ -666,18 +666,25 @@
     //add bgmusic event listener
     let bgmusic = document.getElementById("bgmusic");
     let state = 0;
+    let start_play_time = undefined;
+    let is_playing = false;
+    let offset_angle = 0;
+    let angle = 0;
     play_button = document.getElementById("play_button");
     play_button.addEventListener("click", function () {
         if (state == 0)
         {
             bgmusic.play();
-            play_button.style.animation = "rotate 2s linear infinite";
+            start_play_time = Date.now();
+            is_playing = true;
             state = 1;
         }
         else
         {
             bgmusic.pause();
-            play_button.style.animation = "none";
+            start_play_time = undefined;
+            is_playing = false;
+            offset_angle = angle;
             state = 0;
         }
     });
@@ -744,6 +751,8 @@
     {
         var body_element = document.body;
         var gray_div = document.createElement("div");
+        var play_button = document.getElementById("play_button");
+        play_button.style.animation = "hide 0.5s forwards";
         gray_div.setAttribute("id", "gray_div");
         gray_div.style.top = "0px";
         gray_div.style.bottom = "0px";
@@ -880,6 +889,8 @@
     function deleteGrayBackground()
     {
         var gray_div = document.getElementById("gray_div");
+        var play_button = document.getElementById("play_button");
+        play_button.style.animation = "show 0.5s forwards";
         if (gray_div != null)
         {
             gray_div.style.animationName = "hide_half";
@@ -1218,6 +1229,10 @@
         var intro_top = intro_top_base + 15*Math.sin(t*Math.PI/3);
         down_arrow_div.style.top = parseInt(arrow_top).toString() + "px";
         main_intro.style.top = parseInt(intro_top).toString() + "px";
+
+        var play_button = document.getElementById("play_button");
+        play_button.style.transform = "rotate(" + angle.toString() + "deg" + ")";
+        angle = (Date.now() - start_play_time)/1000*180 + offset_angle;
 
         //update canvas
         context.clearRect(0,0,screen_width,screen_height);
