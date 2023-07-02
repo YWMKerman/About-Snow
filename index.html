@@ -33,6 +33,10 @@
             font-family: "Source Han Sans";
             src: url("fonts/NotoSansHans-Regular.otf");
         }
+        @keyframes rotate {
+            from {transform: rotate(0deg);}
+            to   {transform: rotate(360deg);}
+        }
         @keyframes shadow_expand_pic1 {
             from {box-shadow: var(--current-box-shadow-pic1); transform: var(--current-transform-pic1);}
             to   {box-shadow: 5px 5px 5px; transform: scale(1.1);}
@@ -184,6 +188,26 @@
         @keyframes movedown {
             from {top: var(--end-top); opacity: 1;}
             to   {top: var(--start-top); opacity: 0;}
+        }
+        #play_button {
+            position: fixed;
+            z-index: 500;
+            background-color: #f1f1f1;
+            width: 50px;
+            height: 50px;
+            top: 100px;
+            right: 30px;
+            border: 5px #d3d3d3 solid;
+            border-radius: 50%;
+        }
+        #music_icon {
+            position: relative;
+            top: 15px;
+            left: 15px;
+            bottom: 15px;
+            right: 15px;
+            width: 20px;
+            height: 20px;
         }
         #topnav {
             z-index: 6;
@@ -514,11 +538,14 @@
     </style>
 </head>
 <body style="background-color: rgb(231, 225, 229)">
-    <audio autoplay loop style="display: none">
+    <audio loop preload id="bgmusic" style="display: none">
         <source src="music/BGM.mp3" type="audio/mpeg">
         <source src="music/BGM.ogg" type="audio/ogg">
         Your browser does not support this audio format.
     </audio>
+    <div id="play_button">
+        <img id="music_icon" src="images/music.png"></img>
+    </div>
     <div id="topnav" class="nav">
         <img id="profile" src="images/profile.png"></img>
         <img id="snow" src="images/snow.png"></img>
@@ -636,6 +663,25 @@
     </div>
 </body>
 <script>
+    //add bgmusic event listener
+    let bgmusic = document.getElementById("bgmusic");
+    let state = 0;
+    play_button = document.getElementById("play_button");
+    play_button.addEventListener("click", function () {
+        if (state == 0)
+        {
+            bgmusic.play();
+            play_button.style.animation = "rotate 2s linear infinite";
+            state = 1;
+        }
+        else
+        {
+            bgmusic.pause();
+            play_button.style.animation = "none";
+            state = 0;
+        }
+    });
+
     //adjust margin
     var screen_width = screen.width;
     var screen_height = screen.height;
@@ -1079,6 +1125,7 @@
         snow = document.getElementById("snow");
         navtitle = document.getElementsByClassName("navtitle");
         background = document.getElementById("background");
+        play_button = document.getElementById("play_button");
 
         if (screen_width < 980)
         {
@@ -1098,6 +1145,8 @@
             snow.style.top = parseInt(height_ratio*8).toString() + "px";
             snow.style.left = parseInt(height_ratio*58).toString() + "px";
             snow.style.height = parseInt(height_ratio*42).toString() + "px";
+            play_button.style.top = parseInt(height_ratio*100).toString() + "px";
+            play_button.style.right = parseInt(30/height_ratio).toString() + "px";
 
             for (let i=0; i<navtitle.length; i++)
             {
@@ -1119,6 +1168,8 @@
             snow.style.top = "8px";
             snow.style.left = "58px";
             snow.style.height = "42px";
+            play_button.style.top = "100px";
+            play_button.style.right = "30px";
 
             for (let i=0; i<navtitle.length; i++)
             {
