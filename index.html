@@ -200,6 +200,12 @@
             border: 5px #d3d3d3 solid;
             box-shadow: 5px 5px 5px #5e5e5e88;
             border-radius: 50%;
+            transform: scale(1.0);
+            transition: transform 0.2s ease;
+        }
+        #play_button:hover {
+            transform: scale(1.2);
+            transition: transform 0.2s ease;
         }
         #music_icon {
             position: relative;
@@ -226,7 +232,7 @@
             top: 5px;
             left: 10px;
             height: 50px;
-            border-radius: 25px;
+            border-radius: 50%;
             box-shadow: 1px 1px 1px #5e5e5e88;
         }
         #snow {
@@ -257,6 +263,14 @@
             text-decoration: none;
             text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
             color: black;
+        }
+        .navtitle {
+            transform: scale(1.0) rotate(0deg);
+            transition: transform 0.3s ease;
+        }
+        .navtitle:hover {
+            transform: scale(1.2) rotate(5deg);
+            transition: transform 0.3s ease;
         }
         #background {
             z-index: 3;
@@ -322,7 +336,13 @@
             left: 50px;
             width: 200px;
             border-radius: 100px;
-            box-shadow: 2px 2px 2px #5e5e5e88
+            box-shadow: 2px 2px 2px #5e5e5e88;
+            transform: scale(1.0) rotate(0deg);
+            transition: transform 0.3s ease;
+        }
+        #profile_intro:hover {
+            transform: scale(1.1) rotate(30deg);
+            transition: transform 0.3s ease;
         }
         #profile_name {
             position: absolute;
@@ -664,6 +684,24 @@
     </div>
 </body>
 <script>
+    //define a function to identify whether the user is using a mobile device
+    function isMobileDevice()
+    {
+        const match_list = [
+            /Android/i,
+            /webOS/i,
+            /iPhone/i,
+            /iPad/i,
+            /iPod/i,
+            /BlackBerry/i,
+            /Windows Phone/i
+        ];
+        
+        return match_list.some((item) => {
+            return navigator.userAgent.match(item);
+        });
+    }
+
     //add bgmusic event listener
     let bgmusic = document.getElementById("bgmusic");
     let state = 0;
@@ -717,31 +755,6 @@
         main_background_img.style.height = height.toString() + "px";
     }
 
-    //add navtitle event listener
-    navtitle = document.getElementsByClassName("navtitle");
-    for (let i=0; i<navtitle.length; i++)
-    {
-        navtitle[i].addEventListener("mouseover", function () {
-            this.style.transform = "scale(1.2) rotate(5deg)";
-            this.style.transition = "transform 0.3s ease";
-        });
-        navtitle[i].addEventListener("mouseout", function () {
-            this.style.transform = "scale(1.0) rotate(0deg)";
-            this.style.transition = "transform 0.3s ease";
-        });
-    }
-
-    //add profile_intro event listener
-    profile_intro = document.getElementById("profile_intro");
-    profile_intro.addEventListener("mouseover", function () {
-        this.style.transform = "scale(1.1) rotate(30deg)";
-        this.style.transition = "transform 0.3s ease";
-    });
-    profile_intro.addEventListener("mouseout", function () {
-        this.style.transform = "scale(1.0) rotate(0deg)";
-        this.style.transition = "transform 0.3s ease";
-    });
-
     //get picture elements
     var pic_li = Array.from(document.getElementsByClassName("pic_li"));
     var girl_li = Array.from(document.getElementsByClassName("girl_li"));
@@ -785,29 +798,50 @@
         close_button.style.height = "50px";
         close_button.style.position = "fixed";
         close_button.style.zIndex = "200";
-        close_button.borderRadius = "25px";
+        close_button.borderRadius = "50%";
         close_button.style.animationName = "show";
         close_button.style.animationDuration = "0.5s";
         close_button.style.animationFillMode = "forwards";
         body_element.appendChild(close_button);
 
         //add event listener
-        close_button.addEventListener("mouseover", function () {
-            close_button.style.transform = "rotate(90deg) scale(1.2)";
-            close_button.style.transformOrigin = "23px 23px";
-            close_button.style.transition = "transform 0.5s ease";
-        });
-        close_button.addEventListener("mouseout", function () {
-            close_button.style.transform = "rotate(0deg) scale(1)";
-            close_button.style.transformOrigin = "23px 23px";
-            close_button.style.transition = "transform 0.5s ease";
-        });
-        close_button.addEventListener("click", function () {
-            document.documentElement.style.overflow = "auto";
-            deleteGrayBackground();
-            deleteCloseButton();
-            deletePicture();
-        });
+        if (isMobileDevice())
+        {
+            close_button.addEventListener("click", function () {
+                close_button.style.transform = "rotate(90deg) scale(1.2)";
+                close_button.style.transformOrigin = "23px 23px";
+                close_button.style.transition = "transform 0.5s ease";
+                document.documentElement.style.overflow = "auto";
+                recover_size();
+                is_viewing = false;
+                element_viewing = undefined;
+                deleteGrayBackground();
+                deleteCloseButton();
+                deletePicture();
+            });
+        }
+        else
+        {
+            close_button.addEventListener("mouseover", function () {
+                close_button.style.transform = "rotate(90deg) scale(1.2)";
+                close_button.style.transformOrigin = "23px 23px";
+                close_button.style.transition = "transform 0.5s ease";
+            });
+            close_button.addEventListener("mouseout", function () {
+                close_button.style.transform = "rotate(0deg) scale(1)";
+                close_button.style.transformOrigin = "23px 23px";
+                close_button.style.transition = "transform 0.5s ease";
+            });
+            close_button.addEventListener("click", function () {
+                document.documentElement.style.overflow = "auto";
+                recover_size();
+                is_viewing = false;
+                element_viewing = undefined;
+                deleteGrayBackground();
+                deleteCloseButton();
+                deletePicture();
+            });
+        }
 
         //add cross img
         var cross = document.createElement("img");
@@ -827,26 +861,28 @@
         var picture = document.createElement("img");
         picture.setAttribute("id", "picture");
         picture.setAttribute("src", path);
-        var w_h_ratio = picture.naturalWidth/picture.naturalHeight;
-        var height = Math.min(window.innerHeight*0.8, window.innerWidth*0.8/w_h_ratio);
-        picture.style.top = parseInt(window.innerHeight+100).toString() + "px";
-        picture.style.left = "0px";
-        picture.style.right = "0px";
-        picture.style.margin = "auto";
-        picture.style.height = parseInt(height).toString() + "px";
-        picture.style.position = "fixed";
-        picture.style.zIndex = "300";
+        picture.onload = function () {
+            var w_h_ratio = picture.naturalWidth/picture.naturalHeight;
+            var height = Math.min(window.innerHeight*0.8, window.innerWidth*0.8/w_h_ratio);
+            picture.style.top = parseInt(window.innerHeight+100).toString() + "px";
+            picture.style.left = "0px";
+            picture.style.right = "0px";
+            picture.style.margin = "auto";
+            picture.style.height = parseInt(height).toString() + "px";
+            picture.style.position = "fixed";
+            picture.style.zIndex = "300";
 
-        //change --start-top & --end-top
-        document.documentElement.style.setProperty("--start-top", parseInt(window.innerHeight+100).toString() + "px");
-        document.documentElement.style.setProperty("--end-top", parseInt((window.innerHeight-parseInt(height))/2).toString() + "px");
+            //change --start-top & --end-top
+            document.documentElement.style.setProperty("--start-top", parseInt(window.innerHeight+100).toString() + "px");
+            document.documentElement.style.setProperty("--end-top", parseInt((window.innerHeight-parseInt(height))/2).toString() + "px");
 
-        //setup animation
-        picture.style.animationName = "moveup";
-        picture.style.animationDuration = "0.5s";
-        picture.style.animationFillMode = "forwards";
+            //setup animation
+            picture.style.animationName = "moveup";
+            picture.style.animationDuration = "0.5s";
+            picture.style.animationFillMode = "forwards";
 
-        body_element.appendChild(picture);
+            body_element.appendChild(picture);
+        }
     }
 
     //define a function to delete picture
@@ -965,12 +1001,15 @@
 
     function onmouseout()
     {
-        this_style = window.getComputedStyle(this);
-        document.documentElement.style.setProperty(getCurrentBoxShadowName(this), this_style.getPropertyValue("box-shadow"));
-        document.documentElement.style.setProperty(getCurrentTransformName(this), this_style.getPropertyValue("transform"));
-        this.style.animationName = getCurrentAnimationName("shadow_shrink", this);
-        this.style.animationDuration = "0.2s";
-        this.style.animationFillMode = "forwards";
+        if (!is_viewing)
+        {
+            this_style = window.getComputedStyle(this);
+            document.documentElement.style.setProperty(getCurrentBoxShadowName(this), this_style.getPropertyValue("box-shadow"));
+            document.documentElement.style.setProperty(getCurrentTransformName(this), this_style.getPropertyValue("transform"));
+            this.style.animationName = getCurrentAnimationName("shadow_shrink", this);
+            this.style.animationDuration = "0.2s";
+            this.style.animationFillMode = "forwards";
+        }
     }
 
     function onmousedown()
@@ -985,6 +1024,8 @@
 
     function onmouseup()
     {
+        is_viewing = true;
+        element_viewing = this;
         this_style = window.getComputedStyle(this);
         document.documentElement.style.setProperty(getCurrentBoxShadowName(this), this_style.getPropertyValue("box-shadow"));
         document.documentElement.style.setProperty(getCurrentTransformName(this), this_style.getPropertyValue("transform"));
@@ -1009,13 +1050,35 @@
         addPicture(path);
     }
 
-    //add event listener
-    for (let i=0; i<picture.length; i++)
+    function recover_size()
     {
-        picture[i].addEventListener("mouseover", onmouseover);
-        picture[i].addEventListener("mouseout", onmouseout);
-        picture[i].addEventListener("mousedown", onmousedown);
-        picture[i].addEventListener("mouseup", onmouseup);
+        element_style = window.getComputedStyle(element_viewing);
+        document.documentElement.style.setProperty(getCurrentBoxShadowName(element_viewing), element_style.getPropertyValue("box-shadow"));
+        document.documentElement.style.setProperty(getCurrentTransformName(element_viewing), element_style.getPropertyValue("transform"));
+        element_viewing.style.animationName = getCurrentAnimationName("shadow_shrink", element_viewing);
+        element_viewing.style.animationDuration = "0.2s";
+        element_viewing.style.animationFillMode = "forwards";
+    }
+
+    //add event listener
+    let is_viewing = false;
+    let element_viewing = undefined;
+    if (isMobileDevice())
+    {
+        for (let i=0; i<picture.length; i++)
+        {
+            picture[i].addEventListener("click", onmouseup);
+        }
+    }
+    else
+    {
+        for (let i=0; i<picture.length; i++)
+        {
+            picture[i].addEventListener("mouseover", onmouseover);
+            picture[i].addEventListener("mouseout", onmouseout);
+            picture[i].addEventListener("mousedown", onmousedown);
+            picture[i].addEventListener("mouseup", onmouseup);
+        }
     }
 
     //setup canvas
