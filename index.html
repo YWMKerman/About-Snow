@@ -189,9 +189,6 @@
             from {top: var(--end-top); opacity: 1;}
             to   {top: var(--start-top); opacity: 0;}
         }
-        html {
-            filter: grayscale(100%);
-        }
         #play_button {
             position: fixed;
             z-index: 500;
@@ -1315,14 +1312,18 @@
             var arrow_top_base = 590;
             var intro_top_base = 80;
         }
-        var arrow_top = arrow_top_base + 10*Math.sin(t*Math.PI);
-        var intro_top = intro_top_base + 15*Math.sin(t*Math.PI/3);
+        var arrow_top = arrow_top_base + 10*Math.sin(t*2*Math.PI*(1/2));
+        var intro_top = intro_top_base + 15*Math.sin(t*2*Math.PI*(1/6));
         down_arrow_div.style.top = parseInt(arrow_top).toString() + "px";
         main_intro.style.top = parseInt(intro_top).toString() + "px";
 
         var music_icon = document.getElementById("music_icon");
         music_icon.style.transform = "rotate(" + angle.toString() + "deg" + ")";
         angle = (Date.now() - start_play_time)/1000*180 + offset_angle;
+
+        var html_element = document.documentElement;
+        var grayscale = 50*Math.sin(t*2*Math.PI*(1/5)) + 50;
+        html_element.style.filter = "grayscale" + '(' + parseInt(grayscale).toString() + '%' + ')';
 
         //update canvas
         context.clearRect(0,0,screen_width,screen_height);
