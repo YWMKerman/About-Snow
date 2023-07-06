@@ -400,6 +400,12 @@
             height: 20px;
             margin: 5px;
             filter: drop-shadow(1px 1px 2px rgb(50, 50, 50, 0.3));
+            transform: scale(1.0) rotate(0deg);
+            transition: transform 0.2s ease;
+        }
+        .icon:hover {
+            transform: scale(1.1) rotate(5deg);
+            transition: transform 0.2s ease;
         }
         #down_arrow_div {
             z-index: 5;
@@ -640,10 +646,10 @@
                 <span>Gmail： YWMKerman@gmail.com</span>
                 <br><br>
                 <span>其他：</span>
-                <img class="icon" src="images/github.png"></img>
-                <img class="icon" src="images/twitter.png"></img>
-                <img class="icon" src="images/youtube.png"></img>
-                <img class="icon" src="images/bilibili.png"></img>
+                <a href="https://github.com/YWMKerman" target="_blank"><img class="icon" src="images/github.png"></img></a>
+                <a href="https://twitter.com/SkySnow_01" target="_blank"><img class="icon" src="images/twitter.png"></img></a>
+                <a href="https://youtube.com/@YWMKerman" target="_blank"><img class="icon" src="images/youtube.png"></img></a>
+                <a href="https://space.bilibili.com/443343766" target="_blank"><img class="icon" src="images/bilibili.png"></img></a>
             </p>
         </div>
     </div>
