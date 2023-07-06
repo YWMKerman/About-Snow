@@ -1322,7 +1322,7 @@
         angle = (Date.now() - start_play_time)/1000*180 + offset_angle;
 
         var html_element = document.documentElement;
-        var grayscale = 50*Math.sin(t*2*Math.PI*(1/5)) + 50;
+        var grayscale = 50*Math.sin(t*2*Math.PI*(1/6)) + 50;
         html_element.style.filter = "grayscale" + '(' + parseInt(grayscale).toString() + '%' + ')';
 
         //update canvas
