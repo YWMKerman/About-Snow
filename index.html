@@ -727,6 +727,19 @@
         });
     }
 
+    //adjust page color
+    var html_element = document.documentElement;
+    var date = new Date();
+    var hour = date.getHours();
+    if (hour >= 19 && hour < 7)
+    {
+        html_element.style.filter = "grayscale(100%)";
+    }
+    else
+    {
+        html_element.style.filter = "grayscale(0%)";
+    }
+
     //add bgmusic event listener
     let bgmusic = document.getElementById("bgmusic");
     let state = 0;
@@ -1322,10 +1335,6 @@
         var music_icon = document.getElementById("music_icon");
         music_icon.style.transform = "rotate(" + angle.toString() + "deg" + ")";
         angle = (Date.now() - start_play_time)/1000*180 + offset_angle;
-
-        var html_element = document.documentElement;
-        var grayscale_percent = 50*Math.sin(t*2*Math.PI*(1/6)) + 50;
-        html_element.style.filter = "grayscale" + '(' + parseInt(grayscale_percent).toString() + '%' + ')';
 
         //update canvas
         context.clearRect(0,0,screen_width,screen_height);
