@@ -731,7 +731,7 @@
     var html_element = document.documentElement;
     var date = new Date();
     var hour = date.getHours();
-    if (hour >= 19 && hour < 7)
+    if (hour >= 19 || hour < 7)
     {
         html_element.style.filter = "grayscale(100%)";
     }
